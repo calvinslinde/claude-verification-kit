@@ -32,7 +32,7 @@ cp -R skills/why-chain ~/.claude/skills/why-chain
 cp agents/research-verify.md ~/.claude/agents/research-verify.md
 ```
 
-Then the hook. If `~/.claude/settings.json` does not exist, copy `hooks/settings-snippet.json` to that path. If it does exist, open it and add the `"UserPromptSubmit"` entry from the snippet inside its `"hooks"` object (create `"hooks"` if there isn't one), keeping everything else as it is.
+Then the hook. If `~/.claude/settings.json` does not exist, copy `hooks/settings-snippet.json` to that path. If it does exist, open it and find its `"hooks"` object (create one if there isn't). If that object has no `"UserPromptSubmit"` list yet, add the snippet's whole `"UserPromptSubmit"` entry to it. If it already has one, add the snippet's list item (the object holding `"hooks": [ { "type": "command", ... } ]`) to the existing list instead of adding a second `"UserPromptSubmit"` key: JSON keeps only one of two duplicate keys, and the other hook would silently disappear. `python3 install.py` does this merge for you.
 
 ## What it costs
 
