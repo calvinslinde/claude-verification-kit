@@ -13,12 +13,26 @@ It is four small pieces you add to [Claude Code](https://claude.com/claude-code)
 
 ## Install
 
-1. Install Claude Code, if you haven't.
-2. Copy `skills/why-chain` into `~/.claude/skills/`.
-3. Copy `agents/research-verify.md` into `~/.claude/agents/`.
-4. Paste the rules you want from `rules/CONFIRM-BEFORE-ACTING.md` into `~/.claude/CLAUDE.md`. Create the file if it doesn't exist.
-5. Optional: merge the hook from `hooks/settings-snippet.json` into `~/.claude/settings.json`.
-6. Start a new Claude Code session. The skill and the agent load at startup.
+1. Install Claude Code, if you haven't: https://claude.com/product/claude-code has the current instructions.
+2. From this folder, run:
+
+   ```
+   python3 install.py
+   ```
+
+   It creates `~/.claude/skills/` and `~/.claude/agents/` if they are missing, copies the skill and the agent there, and adds the reminder hook to `~/.claude/settings.json` without disturbing anything already in that file. `python3 install.py --dry-run` shows the plan first. Python 3.8 or newer; standard library only.
+3. Paste the rules you want from `rules/CONFIRM-BEFORE-ACTING.md` into `~/.claude/CLAUDE.md`. Create the file if it doesn't exist. The installer leaves this file alone on purpose: it is yours.
+4. Start a new Claude Code session. The skill and the agent load at startup.
+
+### By hand, if you prefer
+
+```
+mkdir -p ~/.claude/skills ~/.claude/agents
+cp -R skills/why-chain ~/.claude/skills/why-chain
+cp agents/research-verify.md ~/.claude/agents/research-verify.md
+```
+
+Then the hook. If `~/.claude/settings.json` does not exist, copy `hooks/settings-snippet.json` to that path. If it does exist, open it and add the `"UserPromptSubmit"` entry from the snippet inside its `"hooks"` object (create `"hooks"` if there isn't one), keeping everything else as it is.
 
 ## What it costs
 
