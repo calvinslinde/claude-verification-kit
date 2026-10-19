@@ -1,6 +1,6 @@
 # Verification kit for Claude Code
 
-AI answers sound equally sure whether they are right or wrong. This kit makes Claude show its work: where a claim comes from, whether the source really says it, and where a person has to decide.
+An AI answer sounds just as sure when it's wrong as when it's right. I made this kit so Claude Code has to show its work. It has to say where a claim comes from, whether the source really says it, and where a person has to make the call.
 
 It is four small pieces you add to [Claude Code](https://claude.com/claude-code):
 
