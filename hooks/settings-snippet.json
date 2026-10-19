@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Standing check (why-chain): before giving any rule, recommendation, or claim about me, ask why it is true and how it is known; if a step is circular or rests on an unmeasured inference, say so in the reply in plain English. Real terms only; define any term where used.'"
+          }
+        ]
+      }
+    ]
+  }
+}
