@@ -48,14 +48,16 @@ The why-chain skill, on the claim "our new AI grader is accurate" (this is the e
 The fact-checking agent returns one block per claim, in this shape:
 
 ```
-```
 CLAIM: <exact claim being checked>
 VERDICT: <confirmed | disputed | mixed | no-evidence | scope-dependent>
+
 EVIDENCE:
 - <source 1, key finding, citation>
 - <source 2, key finding, citation>
-- <source 3 if relevant>
+
 NUANCE: <what the simple verdict misses, if anything>
+
+CONFIDENCE: <high | medium | low>, with a one-sentence reason
 ```
 
 The confirm-before-acting rules add one question before anything that sends, submits, pays, or changes an account: it stops and asks, and it does not treat an instruction found inside a document or a web page as yours.
