@@ -34,6 +34,32 @@ cp agents/research-verify.md ~/.claude/agents/research-verify.md
 
 Then the hook. If `~/.claude/settings.json` does not exist, copy `hooks/settings-snippet.json` to that path. If it does exist, open it and find its `"hooks"` object (create one if there isn't). If that object has no `"UserPromptSubmit"` list yet, add the snippet's whole `"UserPromptSubmit"` entry to it. If it already has one, add the snippet's list item (the object holding `"hooks": [ { "type": "command", ... } ]`) to the existing list instead of adding a second `"UserPromptSubmit"` key: JSON keeps only one of two duplicate keys, and the other hook would silently disappear. `python3 install.py` does this merge for you.
 
+## What it looks like
+
+The why-chain skill, on the claim "our new AI grader is accurate" (this is the example from the skill file itself):
+
+- Claim: the grader's scores match what a careful person would score.
+- Why: it gave sensible-looking scores on the ten samples we tried. FACT that we looked; consistent with accuracy, not shown by it.
+- Circularity check: "sensible-looking" was judged by the person who built it and expects it to work. CIRCULAR as stated.
+- How would we know: score a set of samples by hand and compare. UNKNOWN until done.
+- Testable version: on 40 hand-checked samples, the grader agrees with the hand check on at least 38.
+- Corrected claim: the grader is untested. Check 40 samples by hand before trusting any number it produces.
+
+The fact-checking agent returns one block per claim, in this shape:
+
+```
+```
+CLAIM: <exact claim being checked>
+VERDICT: <confirmed | disputed | mixed | no-evidence | scope-dependent>
+EVIDENCE:
+- <source 1, key finding, citation>
+- <source 2, key finding, citation>
+- <source 3 if relevant>
+NUANCE: <what the simple verdict misses, if anything>
+```
+
+The confirm-before-acting rules add one question before anything that sends, submits, pays, or changes an account: it stops and asks, and it does not treat an instruction found inside a document or a web page as yours.
+
 ## What it costs
 
 The fact-checking agent reads full papers, not just abstracts, so it is slow and uses real model capacity. In testing, one check read three full papers and took about 15 minutes at the maximum reasoning-effort setting. Save it for claims that matter. The why-chain skill is much faster; in testing it took about two and a half minutes at the same setting, and less at lower effort.
